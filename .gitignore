@@ -133,3 +133,5 @@ bin/
 *.bat
 *.dist
 *.*build
+
+*.pyz
