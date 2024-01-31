@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools"]
+
+[project]
+name = "Steam_Search"
+version = "9.0.1"
+description = "Search and launch your Steam Game library"
+authors = [
+    {name = "William McAllister", email = "dev.garulf@gmail.com"},
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+dependencies = [
+    "pyflowlauncher[all]==0.7.1-dev.0",
+    "steam-client==2.0.1.dev0"
+]
+
+
+[project.scripts]
+steam_search = "steam_search.__main__:main"
+
+
+[tool.bumpversion]
+current_version = "9.0.1"
+parse = """(?x)
+    (?P<major>[0-9]+)
+    \\.(?P<minor>[0-9]+)
+    \\.(?P<patch>[0-9]+)
+    (?:
+        -(?P<label>dev|rc|release)
+        (?:.(?P<label_n>[0-9]+))?
+    )?
+"""
+serialize = [
+    "{major}.{minor}.{patch}",
+]
+
+tag = true
+allow_dirty = false
+commit = true
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = "version = '{current_version}'"
+replace = "version = '{new_version}'"
+
+[[tool.bumpversion.files]]
+filename = "src/plugin.json"
+search = '"Version": "{current_version}"'
+replace = '"Version": "{new_version}"'
